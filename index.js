@@ -58,24 +58,44 @@ const playerTwo = new Sprite({
 console.log(playerOne);
 console.log(playerTwo);
 
+const keys = {
+    a:{
+        pressed: false
+    },
+    d: {
+        pressed: false
+    }
+};
+
+let lastKey;
+
 const animate = () => {
     window.requestAnimationFrame(animate);
     context.fillStyle = 'black';
     context.fillRect(0, 0, canvas.width, canvas.height);
     playerOne.update();
     playerTwo.update();
+
+    playerOne.velocity.x = 0;
+
+    if (keys.a.pressed && lastKey === 'a'){
+        playerOne.velocity.x = -1;
+    } else if (keys.d.pressed && lastKey === 'd'){
+        playerOne.velocity.x = 1;
+    }
 }
 
 animate();
 
-
 window.addEventListener('keydown', (e) => {
     switch(e.key){
         case 'd':
-            playerOne.velocity.x = 1;
+            keys.d.pressed = true;
+            lastKey = 'd';
             break;
         case 'a':
-            playerOne.velocity.x = -1;
+            keys.a.pressed = true;
+            lastKey = 'a';
             break;
     }
 })
@@ -83,10 +103,10 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => {
     switch(e.key){
         case 'd':
-            playerOne.velocity.x = 0;
+            keys.d.pressed = false;
             break;
         case 'a':
-            playerOne.velocity.x = 0;
+            keys.a.pressed = false;
             break;
     }
 })
