@@ -22,6 +22,7 @@ class Sprite {
 
     update(){
         this.draw();
+        this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
         if (this.position.y + this.height + this.velocity.y >= canvas.height) {
@@ -57,7 +58,6 @@ const playerTwo = new Sprite({
 console.log(playerOne);
 console.log(playerTwo);
 
-//animation loop to move the players
 const animate = () => {
     window.requestAnimationFrame(animate);
     context.fillStyle = 'black';
@@ -67,3 +67,26 @@ const animate = () => {
 }
 
 animate();
+
+
+window.addEventListener('keydown', (e) => {
+    switch(e.key){
+        case 'd':
+            playerOne.velocity.x = 1;
+            break;
+        case 'a':
+            playerOne.velocity.x = -1;
+            break;
+    }
+})
+
+window.addEventListener('keyup', (e) => {
+    switch(e.key){
+        case 'd':
+            playerOne.velocity.x = 0;
+            break;
+        case 'a':
+            playerOne.velocity.x = 0;
+            break;
+    }
+})
