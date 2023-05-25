@@ -13,6 +13,7 @@ class Sprite {
         this.position = position;
         this.velocity = velocity;
         this.height = 150;
+        this.lastKey;
     }
 
     draw(){
@@ -67,6 +68,15 @@ const keys = {
     },
     w: {
         pressed: false
+    },
+    ArrowLeft:{
+        pressed: false
+    },
+    ArrowRight: {
+        pressed: false
+    },
+    ArrowUp: {
+        pressed: false
     }
 };
 
@@ -80,11 +90,18 @@ const animate = () => {
     playerTwo.update();
 
     playerOne.velocity.x = 0;
+    playerTwo.velocity.x = 0;
 
     if (keys.a.pressed && lastKey === 'a'){
         playerOne.velocity.x = -1;
     } else if (keys.d.pressed && lastKey === 'd'){
         playerOne.velocity.x = 1;
+    }
+
+    if (keys.ArrowLeft.pressed && playerTwo.lastKey === 'ArrowLeft'){
+        playerTwo.velocity.x = -1;
+    } else if (keys.ArrowRight.pressed && playerTwo.lastKey === 'ArrowRight'){
+        playerTwo.velocity.x = 1;
     }
 }
 
@@ -103,6 +120,18 @@ window.addEventListener('keydown', (e) => {
         case 'w':
             playerOne.velocity.y = -10;
             break;
+
+        case 'ArrowRight':
+            keys.ArrowRight.pressed = true;
+            playerTwo.lastKey = 'ArrowRight';
+            break;
+        case 'ArrowLeft':
+            keys.ArrowLeft.pressed = true;
+            playerTwo.lastKey = 'ArrowLeft';
+            break;
+        case 'ArrowUp':
+            playerTwo.velocity.y = -10;
+            break;
     }
 })
 
@@ -113,6 +142,13 @@ window.addEventListener('keyup', (e) => {
             break;
         case 'a':
             keys.a.pressed = false;
+            break;
+
+        case 'ArrowRight':
+            keys.ArrowRight.pressed = false;
+            break;
+        case 'ArrowLeft':
+            keys.ArrowLeft.pressed = false;
             break;
     }
 })
