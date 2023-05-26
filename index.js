@@ -9,16 +9,28 @@ context.fillRect(0,0, canvas.width, canvas.height);
 const gravity = 0.5;
 
 class Sprite {
-    constructor({position, velocity}){
+    constructor({position, velocity, colour = 'red'}){
         this.position = position;
         this.velocity = velocity;
         this.height = 150;
         this.lastKey;
+        this.attackBox = {
+            position: this.position,
+            width: 100,
+            height: 50
+        };
+        this.colour = colour;
     }
 
     draw(){
-        context.fillStyle = 'red';
+        context.fillStyle = this.colour;
         context.fillRect(this.position.x, this.position.y, 50, this.height);
+
+        context.fillStyle = 'yellow';
+        context.fillRect(this.attackBox.position.x, 
+                         this.attackBox.position.y, 
+                         this.attackBox.width, 
+                         this.attackBox.height)
     }
 
     update(){
@@ -53,7 +65,9 @@ const playerTwo = new Sprite({
     velocity: {
         x: 0,
         y: 0
-    }
+    },
+
+    colour: 'blue'
 });
 
 console.log(playerOne);
