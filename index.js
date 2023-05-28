@@ -12,6 +12,7 @@ class Sprite {
     constructor({position, velocity, colour = 'red'}){
         this.position = position;
         this.velocity = velocity;
+        this.width = 50;
         this.height = 150;
         this.lastKey;
         this.attackBox = {
@@ -24,7 +25,7 @@ class Sprite {
 
     draw(){
         context.fillStyle = this.colour;
-        context.fillRect(this.position.x, this.position.y, 50, this.height);
+        context.fillRect(this.position.x, this.position.y, this.width, this.height);
 
         context.fillStyle = 'yellow';
         context.fillRect(this.attackBox.position.x, 
@@ -114,6 +115,14 @@ const animate = () => {
         playerTwo.velocity.x = -4.5;
     } else if (keys.ArrowRight.pressed && playerTwo.lastKey === 'ArrowRight'){
         playerTwo.velocity.x = 4.5;
+    }
+
+    if (playerOne.attackBox.position.x + playerOne.attackBox.width >= playerTwo.position.x && 
+        playerOne.attackBox.position.x <= playerTwo.position.x + playerTwo.width &&
+        playerOne.attackBox.position.y + playerOne.attackBox.height >= playerTwo.position.y &&
+        playerOne.attackBox.position.y <= playerTwo.position.y + playerTwo.height
+        ){
+        console.log('hit');
     }
 }
 
