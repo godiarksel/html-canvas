@@ -21,17 +21,19 @@ class Sprite {
             height: 50
         };
         this.colour = colour;
+        this.isAttacking
     }
 
     draw(){
         context.fillStyle = this.colour;
         context.fillRect(this.position.x, this.position.y, this.width, this.height);
 
+        if(this.isAttacking){       
         context.fillStyle = 'yellow';
         context.fillRect(this.attackBox.position.x, 
                          this.attackBox.position.y, 
                          this.attackBox.width, 
-                         this.attackBox.height)
+                         this.attackBox.height)}
     }
 
     update(){
@@ -42,6 +44,13 @@ class Sprite {
         if (this.position.y + this.height + this.velocity.y >= canvas.height) {
                 this.velocity.y = 0;
         } else this.velocity.y += gravity;
+    }
+
+    attack(){
+        this.isAttacking = true;
+        setTimeout(() => {
+            this.isAttacking = false;
+        }, 100)
     }
 }
 
@@ -120,8 +129,10 @@ const animate = () => {
     if (playerOne.attackBox.position.x + playerOne.attackBox.width >= playerTwo.position.x && 
         playerOne.attackBox.position.x <= playerTwo.position.x + playerTwo.width &&
         playerOne.attackBox.position.y + playerOne.attackBox.height >= playerTwo.position.y &&
-        playerOne.attackBox.position.y <= playerTwo.position.y + playerTwo.height
+        playerOne.attackBox.position.y <= playerTwo.position.y + playerTwo.height &&
+        playerOne.isAttacking
         ){
+        playerOne.isAttacking = false;
         console.log('hit');
     }
 }
@@ -140,6 +151,9 @@ window.addEventListener('keydown', (e) => {
             break;
         case 'w':
             playerOne.velocity.y = -20;
+            break;
+        case ' ':
+            playerOne.attack();
             break;
 
         case 'ArrowRight':
