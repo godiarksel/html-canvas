@@ -32,13 +32,13 @@ class Sprite {
         context.fillStyle = this.colour;
         context.fillRect(this.position.x, this.position.y, this.width, this.height);
 
-        // if(this.isAttacking){       
+         if(this.isAttacking){       
         context.fillStyle = 'yellow';
         context.fillRect(this.attackBox.position.x, 
                          this.attackBox.position.y, 
                          this.attackBox.width, 
                          this.attackBox.height)}
-    // }
+        }
 
     update(){
         this.draw();
