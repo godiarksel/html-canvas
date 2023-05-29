@@ -120,7 +120,15 @@ const keys = {
     ArrowUp: {
         pressed: false
     }
-};
+}
+
+const collisionDetect = ({pOne, pTwo}) => {
+    return (        
+        pOne.attackBox.position.x + pOne.attackBox.width >= pTwo.position.x && 
+        pOne.attackBox.position.x <= pTwo.position.x + pTwo.width &&
+        pOne.attackBox.position.y + pOne.attackBox.height >= pTwo.position.y &&
+        pOne.attackBox.position.y <= pTwo.position.y + pTwo.height)
+}
 
 const animate = () => {
     window.requestAnimationFrame(animate);
@@ -144,14 +152,26 @@ const animate = () => {
         playerTwo.velocity.x = 4.5;
     }
 
-    if (playerOne.attackBox.position.x + playerOne.attackBox.width >= playerTwo.position.x && 
-        playerOne.attackBox.position.x <= playerTwo.position.x + playerTwo.width &&
-        playerOne.attackBox.position.y + playerOne.attackBox.height >= playerTwo.position.y &&
-        playerOne.attackBox.position.y <= playerTwo.position.y + playerTwo.height &&
+    if (
+        collisionDetect({
+            pOne: playerOne,
+            pTwo: playerTwo
+        }) &&
         playerOne.isAttacking
         ){
         playerOne.isAttacking = false;
-        console.log('hit');
+        console.log('playerTwo is hit');
+    }
+
+    if (
+        collisionDetect({
+            pOne: playerTwo,
+            pTwo: playerOne
+        }) &&
+        playerTwo.isAttacking
+        ){
+        playerTwo.isAttacking = false;
+        console.log('playerOne is hit');
     }
 }
 
@@ -185,6 +205,10 @@ window.addEventListener('keydown', (e) => {
         case 'ArrowUp':
             playerTwo.velocity.y = -20;
             break;
+            case 'ArrowDown':
+                playerTwo.attack();
+                break;
+    
     }
 })
 
