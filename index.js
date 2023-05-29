@@ -9,14 +9,18 @@ context.fillRect(0,0, canvas.width, canvas.height);
 const gravity = 0.5;
 
 class Sprite {
-    constructor({position, velocity, colour = 'red'}){
+    constructor({position, velocity, colour = 'red', offset}){
         this.position = position;
         this.velocity = velocity;
         this.width = 50;
         this.height = 150;
         this.lastKey;
         this.attackBox = {
-            position: this.position,
+            position: {
+                x: this.position.x,
+                y: this.position.y
+            },
+            offset,
             width: 100,
             height: 50
         };
@@ -28,16 +32,20 @@ class Sprite {
         context.fillStyle = this.colour;
         context.fillRect(this.position.x, this.position.y, this.width, this.height);
 
-        if(this.isAttacking){       
+        // if(this.isAttacking){       
         context.fillStyle = 'yellow';
         context.fillRect(this.attackBox.position.x, 
                          this.attackBox.position.y, 
                          this.attackBox.width, 
                          this.attackBox.height)}
-    }
+    // }
 
     update(){
         this.draw();
+
+        this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+        this.attackBox.position.y = this.position.y;
+
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
@@ -63,7 +71,12 @@ const playerOne = new Sprite({
     velocity: {
         x: 0,
         y: 0
-    }
+    },
+
+    offset: {
+        x: 0,
+        y: 0
+    },
 });
 
 const playerTwo = new Sprite({
@@ -77,7 +90,12 @@ const playerTwo = new Sprite({
         y: 0
     },
 
-    colour: 'blue'
+    colour: 'blue',
+
+    offset: {
+        x: -50,
+        y: 0
+    },
 });
 
 console.log(playerOne);
