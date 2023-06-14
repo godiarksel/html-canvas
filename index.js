@@ -160,6 +160,7 @@ const animate = () => {
         playerOne.isAttacking
         ){
         playerOne.isAttacking = false;
+        document.querySelector('#pTwoHealth').style.width = '20%';
         console.log('playerTwo is hit');
     }
 
