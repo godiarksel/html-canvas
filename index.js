@@ -26,6 +26,7 @@ class Sprite {
         };
         this.colour = colour;
         this.isAttacking
+        this.health = 100;
     }
 
     draw(){
@@ -160,7 +161,8 @@ const animate = () => {
         playerOne.isAttacking
         ){
         playerOne.isAttacking = false;
-        document.querySelector('#pTwoHealth').style.width = '20%';
+        playerTwo.health -= 20; 
+        document.querySelector('#pTwoHealth').style.width = playerTwo.health + '%';
         console.log('playerTwo is hit');
     }
 
@@ -172,6 +174,8 @@ const animate = () => {
         playerTwo.isAttacking
         ){
         playerTwo.isAttacking = false;
+        playerOne.health -= 20;
+        document.querySelector('#pOneHealth').style.width = playerOne.health + '%';
         console.log('playerOne is hit');
     }
 }
