@@ -131,6 +131,18 @@ const collisionDetect = ({pOne, pTwo}) => {
         pOne.attackBox.position.y <= pTwo.position.y + pTwo.height)
 }
 
+let timer = 10;
+const timerCounter = () => {
+    if (timer > 0){
+        setTimeout(timerCounter, 1000);
+        timer--;
+        document.querySelector('#timer').innerHTML = timer;
+
+    } 
+}
+
+timerCounter();
+
 const animate = () => {
     window.requestAnimationFrame(animate);
     context.fillStyle = 'black';
