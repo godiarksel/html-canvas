@@ -40,6 +40,13 @@ const playerOne = new Fighter({
         x: 0,
         y: 0
     },
+    imgSrc:'./imgs/playerone/Idle.png',
+    framesMax: 10,
+    scale: 2.5,
+    offset: {
+        x: 100,
+        y: 58
+    }
 });
 
 const playerTwo = new Fighter({
