@@ -18,7 +18,7 @@ const pickWinner = ({playerOne, playerTwo, timerId}) => {
     }
 }
 
-let timer = 10;
+let timer = 30;
 let timerId;
 const timerCounter = () => {
     if (timer > 0){
