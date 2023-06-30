@@ -40,6 +40,35 @@ const playerOne = new Fighter({
         x: 0,
         y: 0
     },
+    imgSrc:'./imgs/playerone/Idle.png',
+    framesMax: 8,
+    scale: 2.5,
+    offset: {
+        x: 100,
+        y: 58
+    },
+    movements: {
+        idle: {
+         imgSrc: './imgs/playerone/Idle.png',
+         framesMax: 10
+        },
+        run: {
+         imgSrc: './imgs/playerone/Run.png',
+         framesMax: 8
+        },
+        jump: {
+         imgSrc: './imgs/playerone/Jump.png',
+         framesMax: 3
+        },
+        fall: {
+         imgSrc: './imgs/playerone/Fall.png',
+         framesMax: 3
+        },
+        attack1: {
+         imgSrc: './imgs/playerone/Attack1.png',
+         framesMax: 7
+        }
+    }
 });
 
 const playerTwo = new Fighter({
@@ -60,9 +89,6 @@ const playerTwo = new Fighter({
         y: 0
     },
 });
-
-console.log(playerOne);
-console.log(playerTwo);
 
 const keys = {
     a:{
@@ -85,8 +111,6 @@ const keys = {
     }
 }
 
-
-
 timerCounter();
 
 const animate = () => {
@@ -96,21 +120,33 @@ const animate = () => {
     background.update();
     shop.update();
     playerOne.update();
-    playerTwo.update();
+    // playerTwo.update();
     
     playerOne.velocity.x = 0;
     playerTwo.velocity.x = 0;
 
+    // Fighter movement
+    
     if (keys.a.pressed && playerOne.lastKey === 'a'){
         playerOne.velocity.x = -4.5;
+        playerOne.switchMovements('run');
     } else if (keys.d.pressed && playerOne.lastKey === 'd'){
         playerOne.velocity.x = 4.5;
+        playerOne.switchMovements('run');
+    } else {
+        playerOne.switchMovements('idle');
     }
 
     if (keys.ArrowLeft.pressed && playerTwo.lastKey === 'ArrowLeft'){
         playerTwo.velocity.x = -4.5;
     } else if (keys.ArrowRight.pressed && playerTwo.lastKey === 'ArrowRight'){
         playerTwo.velocity.x = 4.5;
+    }
+
+    if(playerOne.velocity.y < 0){
+        playerOne.switchMovements('jump');
+    } else if (playerOne.velocity.y > 0) {
+        playerOne.switchMovements('fall');
     }
 
     if (
