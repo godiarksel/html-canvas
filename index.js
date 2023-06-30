@@ -131,23 +131,30 @@ const collisionDetect = ({pOne, pTwo}) => {
         pOne.attackBox.position.y <= pTwo.position.y + pTwo.height)
 }
 
+const pickWinner = ({playerOne, playerTwo, timerId}) => {
+    clearTimeout(timerId);
+    document.querySelector('#textDisplayer').style.display = 'flex';
+    if(playerOne.health === playerTwo.health) {
+        document.querySelector('#textDisplayer').innerHTML = 'tie';  
+    } else if(playerOne.health > playerTwo.health){
+        document.querySelector('#textDisplayer').innerHTML = 'player one wins';
+    } else if(playerOne.health < playerTwo.health){
+        document.querySelector('#textDisplayer').innerHTML = 'player two wins';
+    }
+}
+
 let timer = 10;
+let timerId;
 const timerCounter = () => {
     if (timer > 0){
-        setTimeout(timerCounter, 1000);
+        timerId = setTimeout(timerCounter, 1000);
         timer--;
         document.querySelector('#timer').innerHTML = timer;
     } 
 
     if(timer === 0) {
         document.querySelector('#textDisplayer').style.display = 'flex';
-        if(playerOne.health === playerTwo.health) {
-            document.querySelector('#textDisplayer').innerHTML = 'Tie';  
-        } else if(playerOne.health > playerTwo.health){
-            document.querySelector('#textDisplayer').innerHTML = 'player one wins';
-        } else if(playerOne.health < playerTwo.health){
-            document.querySelector('#textDisplayer').innerHTML = 'player two wins';
-        }
+        pickWinner({playerOne, playerTwo, timerId})
     }
 }
 
@@ -200,6 +207,10 @@ const animate = () => {
         document.querySelector('#pOneHealth').style.width = playerOne.health + '%';
         console.log('playerOne is hit');
     }
+    // Knock out
+        if (playerOne.health <= 0 || playerTwo.health <= 0) {
+            pickWinner({playerOne, playerTwo, timerId})
+        }
 }
 
 animate();
