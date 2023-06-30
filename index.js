@@ -18,7 +18,7 @@ const background = new Sprite ({
 
 const playerOne = new Fighter({
     position: {
-        x: 0,
+        x: 50,
         y: 0
     },
 
