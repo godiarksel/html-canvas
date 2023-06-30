@@ -41,11 +41,21 @@ const playerOne = new Fighter({
         y: 0
     },
     imgSrc:'./imgs/playerone/Idle.png',
-    framesMax: 10,
+    framesMax: 8,
     scale: 2.5,
     offset: {
         x: 100,
         y: 58
+    },
+    movements: {
+        idle: {
+         imgSrc: './imgs/playerone/Idle.png',
+         framesMax: 8
+        },
+        run: {
+         imgSrc: './imgs/playerone/Run.png',
+         framesMax: 8
+        }
     }
 });
 
@@ -67,9 +77,6 @@ const playerTwo = new Fighter({
         y: 0
     },
 });
-
-console.log(playerOne);
-console.log(playerTwo);
 
 const keys = {
     a:{
@@ -103,15 +110,18 @@ const animate = () => {
     background.update();
     shop.update();
     playerOne.update();
-    playerTwo.update();
+    // playerTwo.update();
     
     playerOne.velocity.x = 0;
     playerTwo.velocity.x = 0;
+
+    playerOne.image = playerOne.movements.idle.image;
 
     if (keys.a.pressed && playerOne.lastKey === 'a'){
         playerOne.velocity.x = -4.5;
     } else if (keys.d.pressed && playerOne.lastKey === 'd'){
         playerOne.velocity.x = 4.5;
+        playerOne.image = playerOne.movements.run.image;
     }
 
     if (keys.ArrowLeft.pressed && playerTwo.lastKey === 'ArrowLeft'){

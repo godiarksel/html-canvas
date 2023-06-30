@@ -52,7 +52,8 @@ class Fighter extends Sprite{
         imgSrc, 
         scale = 1, 
         framesMax = 1,
-        offset = {x: 0, y: 0}
+        offset = {x: 0, y: 0},
+        movements
     }){
         super({
             position,
@@ -80,6 +81,14 @@ class Fighter extends Sprite{
         this.frameCurrent = 0;
         this.framesElapsed = 0;
         this.framesDelay = 10;
+        this.movements = movements;
+
+        for (let movement in this.movements) {
+            movements[movement].image = new Image();
+            movements[movement].image.src = movements[movement].imgSrc;
+        }
+        console.log(this.movements)
+
     }
 
 
