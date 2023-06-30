@@ -64,6 +64,10 @@ const playerOne = new Fighter({
          imgSrc: './imgs/playerone/Fall.png',
          framesMax: 3
         },
+        attack1: {
+         imgSrc: './imgs/playerone/Attack1.png',
+         framesMax: 7
+        }
     }
 });
 
