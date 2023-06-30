@@ -1,12 +1,15 @@
 class Sprite {
     constructor({position, imgSrc}){
         this.position = position;
-        this.velocity = velocity;
         this.width = 50;
         this.height = 150;
+        this.image = new Image()
+        this.image.src = imgSrc;
     }
 
-    draw(){}
+    draw(){
+        context.drawImage(this.image, this.position.x, this.position.y);
+    }
 
     update(){
         this.draw();
@@ -55,7 +58,7 @@ class Fighter {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
-        if (this.position.y + this.height + this.velocity.y >= canvas.height) {
+        if (this.position.y + this.height + this.velocity.y >= canvas.height - 38) {
                 this.velocity.y = 0;
         } else this.velocity.y += gravity;
     }

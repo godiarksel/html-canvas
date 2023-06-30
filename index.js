@@ -8,11 +8,17 @@ context.fillRect(0,0, canvas.width, canvas.height);
 
 const gravity = 0.5;
 
-
+const background = new Sprite ({
+    position: {
+        x: 0,
+        y: 0
+    },
+    imgSrc: './imgs/background.png'
+})
 
 const playerOne = new Fighter({
     position: {
-        x: 0,
+        x: 50,
         y: 0
     },
 
@@ -70,40 +76,7 @@ const keys = {
     }
 }
 
-const collisionDetect = ({pOne, pTwo}) => {
-    return (        
-        pOne.attackBox.position.x + pOne.attackBox.width >= pTwo.position.x && 
-        pOne.attackBox.position.x <= pTwo.position.x + pTwo.width &&
-        pOne.attackBox.position.y + pOne.attackBox.height >= pTwo.position.y &&
-        pOne.attackBox.position.y <= pTwo.position.y + pTwo.height)
-}
 
-const pickWinner = ({playerOne, playerTwo, timerId}) => {
-    clearTimeout(timerId);
-    document.querySelector('#textDisplayer').style.display = 'flex';
-    if(playerOne.health === playerTwo.health) {
-        document.querySelector('#textDisplayer').innerHTML = 'tie';  
-    } else if(playerOne.health > playerTwo.health){
-        document.querySelector('#textDisplayer').innerHTML = 'player one wins';
-    } else if(playerOne.health < playerTwo.health){
-        document.querySelector('#textDisplayer').innerHTML = 'player two wins';
-    }
-}
-
-let timer = 10;
-let timerId;
-const timerCounter = () => {
-    if (timer > 0){
-        timerId = setTimeout(timerCounter, 1000);
-        timer--;
-        document.querySelector('#timer').innerHTML = timer;
-    } 
-
-    if(timer === 0) {
-        document.querySelector('#textDisplayer').style.display = 'flex';
-        pickWinner({playerOne, playerTwo, timerId})
-    }
-}
 
 timerCounter();
 
@@ -111,9 +84,10 @@ const animate = () => {
     window.requestAnimationFrame(animate);
     context.fillStyle = 'black';
     context.fillRect(0, 0, canvas.width, canvas.height);
+    background.update();
     playerOne.update();
     playerTwo.update();
-
+    
     playerOne.velocity.x = 0;
     playerTwo.velocity.x = 0;
 
