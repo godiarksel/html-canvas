@@ -50,12 +50,20 @@ const playerOne = new Fighter({
     movements: {
         idle: {
          imgSrc: './imgs/playerone/Idle.png',
-         framesMax: 8
+         framesMax: 10
         },
         run: {
          imgSrc: './imgs/playerone/Run.png',
          framesMax: 8
-        }
+        },
+        jump: {
+         imgSrc: './imgs/playerone/Jump.png',
+         framesMax: 3
+        },
+        fall: {
+         imgSrc: './imgs/playerone/Fall.png',
+         framesMax: 3
+        },
     }
 });
 
@@ -99,8 +107,6 @@ const keys = {
     }
 }
 
-
-
 timerCounter();
 
 const animate = () => {
@@ -115,19 +121,28 @@ const animate = () => {
     playerOne.velocity.x = 0;
     playerTwo.velocity.x = 0;
 
-    playerOne.image = playerOne.movements.idle.image;
-
+    // Fighter movement
+    
     if (keys.a.pressed && playerOne.lastKey === 'a'){
         playerOne.velocity.x = -4.5;
+        playerOne.switchMovements('run');
     } else if (keys.d.pressed && playerOne.lastKey === 'd'){
         playerOne.velocity.x = 4.5;
-        playerOne.image = playerOne.movements.run.image;
+        playerOne.switchMovements('run');
+    } else {
+        playerOne.switchMovements('idle');
     }
 
     if (keys.ArrowLeft.pressed && playerTwo.lastKey === 'ArrowLeft'){
         playerTwo.velocity.x = -4.5;
     } else if (keys.ArrowRight.pressed && playerTwo.lastKey === 'ArrowRight'){
         playerTwo.velocity.x = 4.5;
+    }
+
+    if(playerOne.velocity.y < 0){
+        playerOne.switchMovements('jump');
+    } else if (playerOne.velocity.y > 0) {
+        playerOne.switchMovements('fall');
     }
 
     if (
