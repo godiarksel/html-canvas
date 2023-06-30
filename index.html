@@ -10,55 +10,71 @@
     <div style="position: relative;
                 display: inline-block;">
 
-    <div style="position: absolute;
-                    display: flex;
-                    width: 100%;
-                    align-items: center;
-                    padding: 20px;">
+        <div style="position: absolute;
+                        display: flex;
+                        width: 100%;
+                        align-items: center;
+                        padding: 20px;">
 
+                <!-- player one health bar -->
+                <div style="position: relative;
+                            height: 30px;
+                            width: 100%;
+                            display: flex;
+                            justify-content: flex-end;">
+
+                    <div style="background-color: orange;
+                                height: 30px;
+                                width: 100%;"></div>
+
+                    <div id="pOneHealth"
+                        style="position: absolute;
+                                background: orangered;
+                                top: 0;
+                                right: 0;
+                                bottom: 0;
+                                width: 100%;"></div>
+
+                </div>
+
+                <!-- fight timer -->
+                <div id="timer"
+                    style="background-color: brown;
+                            height: 100px;
+                            width: 100px;
+                            flex-shrink: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;"> 10 </div>
+
+            <!-- player two health bar -->
             <div style="position: relative;
                         height: 30px;
-                        width: 100%;
-                        display: flex;
-                        justify-content: flex-end;">
+                        width: 100%;">
 
-                <div style="background-color: yellow;
-                            height: 30px;
-                            width: 100%;"></div>
+                <div style="background-color: orange;
+                    height: 30px;"></div>
 
-                <div id="pOneHealth"
-                     style="position: absolute;
-                            background: blue;
+                <div id="pTwoHealth"
+                    style=" position: absolute;
+                            background: orangered;
                             top: 0;
                             right: 0;
                             bottom: 0;
-                            width: 100%;"></div>
+                            left: 0;"></div>
 
             </div>
-
-            <div style="background-color: red;
-                        height: 100px;
-                        width: 100px;
-                        flex-shrink: 0;"></div>
-
-
-        <div style="position: relative;
-                    height: 30px;
-                    width: 100%;">
-
-            <div style="background-color: yellow;
-                 height: 30px;"></div>
-
-            <div id="pTwoHealth"
-                style="position: absolute;
-                        background: blue;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        left: 0;"></div>
-
         </div>
-    </div>
+        <div id="textDisplayer"
+             style="position: absolute;
+                    color: white;
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;">Tie</div>
 
         <canvas></canvas>
     </div>
