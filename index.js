@@ -34,11 +34,11 @@ class Sprite {
         context.fillRect(this.position.x, this.position.y, this.width, this.height);
 
          if(this.isAttacking){       
-        context.fillStyle = 'yellow';
-        context.fillRect(this.attackBox.position.x, 
-                         this.attackBox.position.y, 
-                         this.attackBox.width, 
-                         this.attackBox.height)}
+            context.fillStyle = 'yellow';
+            context.fillRect(this.attackBox.position.x, 
+                            this.attackBox.position.y, 
+                            this.attackBox.width, 
+                            this.attackBox.height)}
         }
 
     update(){
@@ -137,8 +137,18 @@ const timerCounter = () => {
         setTimeout(timerCounter, 1000);
         timer--;
         document.querySelector('#timer').innerHTML = timer;
-
     } 
+
+    if(timer === 0) {
+        document.querySelector('#textDisplayer').style.display = 'flex';
+        if(playerOne.health === playerTwo.health) {
+            document.querySelector('#textDisplayer').innerHTML = 'Tie';  
+        } else if(playerOne.health > playerTwo.health){
+            document.querySelector('#textDisplayer').innerHTML = 'player one wins';
+        } else if(playerOne.health < playerTwo.health){
+            document.querySelector('#textDisplayer').innerHTML = 'player two wins';
+        }
+    }
 }
 
 timerCounter();
