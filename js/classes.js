@@ -98,9 +98,9 @@ class Fighter extends Sprite{
         this.animateFrames();
 
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
-        this.attackBox.position.y = this.position.y;
+        this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
-        context.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
+        //  context.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
@@ -115,9 +115,7 @@ class Fighter extends Sprite{
     attack(){
         this.switchMovements('attack1')
         this.isAttacking = true;
-        setTimeout(() => {
-            this.isAttacking = false;
-        }, 100)
+        
     }
 
     switchMovements(movement){

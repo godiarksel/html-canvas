@@ -71,10 +71,10 @@ const playerOne = new Fighter({
     },
     attackBox: {
         offset: {
-            x: 0,
-            y: 0
+            x: 50,
+            y: 50
         },
-        width: 100,
+        width: 160,
         height: 50
     }
 });
@@ -100,7 +100,7 @@ const playerTwo = new Fighter({
     framesMax: 8,
     scale: 2.5,
     offset: {
-        x: 140,
+        x: 220,
         y: 160
     },
     movements: {
@@ -127,10 +127,10 @@ const playerTwo = new Fighter({
     },
     attackBox: {
         offset: {
-            x: 0,
-            y: 0
+            x: -190,
+            y: 50
         },
-        width: 100,
+        width: 150,
         height: 50
     }
 });
@@ -209,12 +209,16 @@ const animate = () => {
             pOne: playerOne,
             pTwo: playerTwo
         }) &&
-        playerOne.isAttacking
+        playerOne.isAttacking && playerOne.frameCurrent === 3
         ){
         playerOne.isAttacking = false;
-        playerTwo.health -= 20; 
+        playerTwo.health -= 10; 
         document.querySelector('#pTwoHealth').style.width = playerTwo.health + '%';
         console.log('playerTwo is hit');
+    }
+
+    if(playerOne.isAttacking && playerOne.frameCurrent === 3) {
+        playerOne.isAttacking = false;
     }
 
     if (
@@ -222,13 +226,18 @@ const animate = () => {
             pOne: playerTwo,
             pTwo: playerOne
         }) &&
-        playerTwo.isAttacking
+        playerTwo.isAttacking && playerTwo.frameCurrent === 3
         ){
         playerTwo.isAttacking = false;
-        playerOne.health -= 20;
+        playerOne.health -= 5;
         document.querySelector('#pOneHealth').style.width = playerOne.health + '%';
         console.log('playerOne is hit');
     }
+
+    if(playerTwo.isAttacking && playerTwo.frameCurrent === 3) {
+        playerTwo.isAttacking = false;
+    }
+
     // Knock out
         if (playerOne.health <= 0 || playerTwo.health <= 0) {
             pickWinner({playerOne, playerTwo, timerId})
