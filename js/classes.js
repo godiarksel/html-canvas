@@ -83,23 +83,21 @@ class Fighter extends Sprite{
         this.framesElapsed = 0;
         this.framesDelay = 10;
         this.movements = movements;
+        this.dead = false;
 
         for (let movement in this.movements) {
             movements[movement].image = new Image();
             movements[movement].image.src = movements[movement].imgSrc;
         }
-        console.log(this.movements)
-
     }
 
 
     update(){
         this.draw();
-        this.animateFrames();
-
+        if(!this.dead) this.animateFrames();
+        
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
-
         //  context.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
 
         this.position.x += this.velocity.x;
@@ -118,11 +116,18 @@ class Fighter extends Sprite{
     }
 
     takeHit(){
-        this.switchMovements('takeHit')
-        this.health -= 10; 
+        this.health -= 20; 
+        if(this.health <= 0){
+            this.switchMovements('death');
+     } else this.switchMovements('takeHit')
     }
 
     switchMovements(movement){
+    if(this.image === this.movements.death.image) {
+        if(this.frameCurrent === this.movements.death.framesMax - 1) 
+            this.dead = true
+                return
+    }
         // overrides other mvts with attack mvt
         if(
         this.image === this.movements.attack1.image &&
@@ -176,6 +181,13 @@ class Fighter extends Sprite{
               if(this.image !== this.movements.takeHit.image){
                 this.image = this.movements.takeHit.image;
                 this.framesMax = this.movements.takeHit.framesMax;
+                this.frameCurrent = 0;
+              }  
+               break;
+            case 'death':
+              if(this.image !== this.movements.death.image){
+                this.image = this.movements.death.image;
+                this.framesMax = this.movements.death.framesMax;
                 this.frameCurrent = 0;
               }  
                break;
