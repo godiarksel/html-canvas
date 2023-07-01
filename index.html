@@ -1,7 +1,11 @@
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive;
         }
     </style>
 </head>
@@ -18,8 +22,8 @@
 
                 <!-- player one health bar -->
                 <div style="position: relative;
-                            height: 30px;
                             width: 100%;
+                            border: 4px solid orange;
                             display: flex;
                             justify-content: flex-end;">
 
@@ -40,8 +44,10 @@
                 <!-- fight timer -->
                 <div id="timer"
                     style="background-color: brown;
-                            height: 100px;
+                            color: white;
+                            height: 70px;
                             width: 100px;
+                            border: 4px solid orange;
                             flex-shrink: 0;
                             display: flex;
                             align-items: center;
@@ -49,8 +55,8 @@
 
             <!-- player two health bar -->
             <div style="position: relative;
-                        height: 30px;
-                        width: 100%;">
+                        width: 100%;
+                        border: 4px solid orange;">
 
                 <div style="background-color: orange;
                     height: 30px;"></div>
@@ -67,7 +73,7 @@
         </div>
         <div id="textDisplayer"
              style="position: absolute;
-                    color: white;
+                    color: brown;
                     display: none;
                     align-items: center;
                     justify-content: center;
@@ -78,6 +84,10 @@
 
         <canvas></canvas>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" 
+            integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer"></script>
     <script src="js/utility.js"></script> 
     <script src="js/classes.js"></script> 
     <script src="index.js"></script> 
