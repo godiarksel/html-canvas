@@ -67,7 +67,23 @@ const playerOne = new Fighter({
         attack1: {
          imgSrc: './imgs/playerone/Attack2.png',
          framesMax: 6
+        },
+        takeHit: {
+         imgSrc: './imgs/playerone/Take Hit.png',
+         framesMax: 3
+        },
+        death: {
+         imgSrc: './imgs/playerone/Death.png',
+         framesMax: 11
         }
+    },
+    attackBox: {
+        offset: {
+            x: 50,
+            y: 50
+        },
+        width: 160,
+        height: 50
     }
 });
 
@@ -92,7 +108,7 @@ const playerTwo = new Fighter({
     framesMax: 8,
     scale: 2.5,
     offset: {
-        x: 140,
+        x: 220,
         y: 160
     },
     movements: {
@@ -115,7 +131,23 @@ const playerTwo = new Fighter({
         attack1: {
          imgSrc: './imgs/playertwo/Attack1.png',
          framesMax: 6
+        },
+        takeHit: {
+         imgSrc: './imgs/playertwo/Take Hit.png',
+         framesMax: 4
+        },
+        death: {
+         imgSrc: './imgs/playertwo/Death.png',
+         framesMax: 6
         }
+    },
+    attackBox: {
+        offset: {
+            x: -190,
+            y: 50
+        },
+        width: 150,
+        height: 50
     }
 });
 
@@ -193,12 +225,16 @@ const animate = () => {
             pOne: playerOne,
             pTwo: playerTwo
         }) &&
-        playerOne.isAttacking
+        playerOne.isAttacking && playerOne.frameCurrent === 3
         ){
+        playerTwo.takeHit();
         playerOne.isAttacking = false;
-        playerTwo.health -= 20; 
         document.querySelector('#pTwoHealth').style.width = playerTwo.health + '%';
         console.log('playerTwo is hit');
+    }
+
+    if(playerOne.isAttacking && playerOne.frameCurrent === 3) {
+        playerOne.isAttacking = false;
     }
 
     if (
@@ -206,13 +242,18 @@ const animate = () => {
             pOne: playerTwo,
             pTwo: playerOne
         }) &&
-        playerTwo.isAttacking
+        playerTwo.isAttacking && playerTwo.frameCurrent === 3
         ){
+            playerOne.takeHit();
         playerTwo.isAttacking = false;
-        playerOne.health -= 20;
         document.querySelector('#pOneHealth').style.width = playerOne.health + '%';
         console.log('playerOne is hit');
     }
+
+    if(playerTwo.isAttacking && playerTwo.frameCurrent === 3) {
+        playerTwo.isAttacking = false;
+    }
+
     // Knock out
         if (playerOne.health <= 0 || playerTwo.health <= 0) {
             pickWinner({playerOne, playerTwo, timerId})
@@ -222,38 +263,44 @@ const animate = () => {
 animate();
 
 window.addEventListener('keydown', (e) => {
-    switch(e.key){
-        case 'd':
-            keys.d.pressed = true;
-            playerOne.lastKey = 'd';
-            break;
-        case 'a':
-            keys.a.pressed = true;
-            playerOne.lastKey = 'a';
-            break;
-        case 'w':
-            playerOne.velocity.y = -20;
-            break;
-        case ' ':
-            playerOne.attack();
-            break;
-
-        case 'ArrowRight':
-            keys.ArrowRight.pressed = true;
-            playerTwo.lastKey = 'ArrowRight';
-            break;
-        case 'ArrowLeft':
-            keys.ArrowLeft.pressed = true;
-            playerTwo.lastKey = 'ArrowLeft';
-            break;
-        case 'ArrowUp':
-            playerTwo.velocity.y = -20;
-            break;
-        case 'ArrowDown':
-            playerTwo.attack();
-            break;
+    if(!playerOne.dead){
+        switch(e.key){
+            case 'd':
+                keys.d.pressed = true;
+                playerOne.lastKey = 'd';
+                break;
+            case 'a':
+                keys.a.pressed = true;
+                playerOne.lastKey = 'a';
+                break;
+            case 'w':
+                playerOne.velocity.y = -20;
+                break;
+            case ' ':
+                playerOne.attack();
+                break;
     
+            }
     }
+
+    if(!playerTwo.dead){
+        switch(e.key){
+            case 'ArrowRight':
+                keys.ArrowRight.pressed = true;
+                playerTwo.lastKey = 'ArrowRight';
+                break;
+            case 'ArrowLeft':
+                keys.ArrowLeft.pressed = true;
+                playerTwo.lastKey = 'ArrowLeft';
+                break;
+            case 'ArrowUp':
+                playerTwo.velocity.y = -20;
+                break;
+            case 'ArrowDown':
+                playerTwo.attack();
+                break;
+        }
+    }   
 })
 
 window.addEventListener('keyup', (e) => {
