@@ -68,6 +68,14 @@ const playerOne = new Fighter({
          imgSrc: './imgs/playerone/Attack2.png',
          framesMax: 6
         }
+    },
+    attackBox: {
+        offset: {
+            x: 0,
+            y: 0
+        },
+        width: 100,
+        height: 50
     }
 });
 
@@ -116,6 +124,14 @@ const playerTwo = new Fighter({
          imgSrc: './imgs/playertwo/Attack1.png',
          framesMax: 6
         }
+    },
+    attackBox: {
+        offset: {
+            x: 0,
+            y: 0
+        },
+        width: 100,
+        height: 50
     }
 });
 
