@@ -89,7 +89,7 @@ const playerOne = new Fighter({
 
 const playerTwo = new Fighter({
     position: {
-        x: 400,
+        x: 900,
         y: 100
     },
 
@@ -180,6 +180,8 @@ const animate = () => {
     context.fillRect(0, 0, canvas.width, canvas.height);
     background.update();
     shop.update();
+    context.fillStyle = 'rgba(255, 255, 255, 0.15)'
+    context.fillRect(0, 0, canvas.width, canvas.height)
     playerOne.update();
     playerTwo.update();
     
@@ -229,8 +231,9 @@ const animate = () => {
         ){
         playerTwo.takeHit();
         playerOne.isAttacking = false;
-        document.querySelector('#pTwoHealth').style.width = playerTwo.health + '%';
-        console.log('playerTwo is hit');
+        gsap.to('#pTwoHealth', {
+            width: playerTwo.health + '%'
+        })
     }
 
     if(playerOne.isAttacking && playerOne.frameCurrent === 3) {
@@ -246,8 +249,9 @@ const animate = () => {
         ){
             playerOne.takeHit();
         playerTwo.isAttacking = false;
-        document.querySelector('#pOneHealth').style.width = playerOne.health + '%';
-        console.log('playerOne is hit');
+        gsap.to('#pOneHealth', {
+            width: playerOne.health + '%'
+        })
     }
 
     if(playerTwo.isAttacking && playerTwo.frameCurrent === 3) {
