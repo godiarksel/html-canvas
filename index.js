@@ -41,7 +41,7 @@ const playerOne = new Fighter({
         y: 0
     },
     imgSrc:'./imgs/playerone/Idle.png',
-    framesMax: 8,
+    framesMax: 10,
     scale: 2.5,
     offset: {
         x: 100,
@@ -65,8 +65,8 @@ const playerOne = new Fighter({
          framesMax: 3
         },
         attack1: {
-         imgSrc: './imgs/playerone/Attack1.png',
-         framesMax: 7
+         imgSrc: './imgs/playerone/Attack2.png',
+         framesMax: 6
         }
     }
 });
@@ -88,6 +88,35 @@ const playerTwo = new Fighter({
         x: -50,
         y: 0
     },
+    imgSrc:'./imgs/playertwo/Idle.png',
+    framesMax: 8,
+    scale: 2.5,
+    offset: {
+        x: 140,
+        y: 160
+    },
+    movements: {
+        idle: {
+         imgSrc: './imgs/playertwo/Idle.png',
+         framesMax: 8
+        },
+        run: {
+         imgSrc: './imgs/playertwo/Run.png',
+         framesMax: 8
+        },
+        jump: {
+         imgSrc: './imgs/playertwo/Jump.png',
+         framesMax: 2
+        },
+        fall: {
+         imgSrc: './imgs/playertwo/Fall.png',
+         framesMax: 2
+        },
+        attack1: {
+         imgSrc: './imgs/playertwo/Attack1.png',
+         framesMax: 6
+        }
+    }
 });
 
 const keys = {
@@ -120,13 +149,12 @@ const animate = () => {
     background.update();
     shop.update();
     playerOne.update();
-    // playerTwo.update();
+    playerTwo.update();
     
     playerOne.velocity.x = 0;
     playerTwo.velocity.x = 0;
 
     // Fighter movement
-    
     if (keys.a.pressed && playerOne.lastKey === 'a'){
         playerOne.velocity.x = -4.5;
         playerOne.switchMovements('run');
@@ -137,16 +165,27 @@ const animate = () => {
         playerOne.switchMovements('idle');
     }
 
-    if (keys.ArrowLeft.pressed && playerTwo.lastKey === 'ArrowLeft'){
-        playerTwo.velocity.x = -4.5;
-    } else if (keys.ArrowRight.pressed && playerTwo.lastKey === 'ArrowRight'){
-        playerTwo.velocity.x = 4.5;
-    }
-
+    // Jumping
     if(playerOne.velocity.y < 0){
         playerOne.switchMovements('jump');
     } else if (playerOne.velocity.y > 0) {
         playerOne.switchMovements('fall');
+    }
+
+    if (keys.ArrowLeft.pressed && playerTwo.lastKey === 'ArrowLeft'){
+        playerTwo.velocity.x = -4.5;
+        playerTwo.switchMovements('run');
+    } else if (keys.ArrowRight.pressed && playerTwo.lastKey === 'ArrowRight'){
+        playerTwo.velocity.x = 4.5;
+        playerTwo.switchMovements('run');
+    } else {
+        playerTwo.switchMovements('idle');
+    }
+
+    if(playerTwo.velocity.y < 0){
+        playerTwo.switchMovements('jump');
+    } else if (playerTwo.velocity.y > 0) {
+        playerTwo.switchMovements('fall');
     }
 
     if (
@@ -210,9 +249,9 @@ window.addEventListener('keydown', (e) => {
         case 'ArrowUp':
             playerTwo.velocity.y = -20;
             break;
-            case 'ArrowDown':
-                playerTwo.attack();
-                break;
+        case 'ArrowDown':
+            playerTwo.attack();
+            break;
     
     }
 })
