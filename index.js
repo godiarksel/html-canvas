@@ -67,6 +67,10 @@ const playerOne = new Fighter({
         attack1: {
          imgSrc: './imgs/playerone/Attack2.png',
          framesMax: 6
+        },
+        takeHit: {
+         imgSrc: './imgs/playerone/Take Hit.png',
+         framesMax: 3
         }
     },
     attackBox: {
@@ -123,6 +127,10 @@ const playerTwo = new Fighter({
         attack1: {
          imgSrc: './imgs/playertwo/Attack1.png',
          framesMax: 6
+        },
+        takeHit: {
+         imgSrc: './imgs/playertwo/Take Hit.png',
+         framesMax: 4
         }
     },
     attackBox: {
@@ -211,8 +219,8 @@ const animate = () => {
         }) &&
         playerOne.isAttacking && playerOne.frameCurrent === 3
         ){
+        playerTwo.takeHit();
         playerOne.isAttacking = false;
-        playerTwo.health -= 10; 
         document.querySelector('#pTwoHealth').style.width = playerTwo.health + '%';
         console.log('playerTwo is hit');
     }
@@ -228,8 +236,8 @@ const animate = () => {
         }) &&
         playerTwo.isAttacking && playerTwo.frameCurrent === 3
         ){
+            playerOne.takeHit();
         playerTwo.isAttacking = false;
-        playerOne.health -= 5;
         document.querySelector('#pOneHealth').style.width = playerOne.health + '%';
         console.log('playerOne is hit');
     }

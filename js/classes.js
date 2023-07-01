@@ -114,14 +114,25 @@ class Fighter extends Sprite{
 
     attack(){
         this.switchMovements('attack1')
-        this.isAttacking = true;
-        
+        this.isAttacking = true;  
+    }
+
+    takeHit(){
+        this.switchMovements('takeHit')
+        this.health -= 10; 
     }
 
     switchMovements(movement){
+        // overrides other mvts with attack mvt
         if(
         this.image === this.movements.attack1.image &&
         this.frameCurrent < this.movements.attack1.framesMax - 1
+            ) 
+            return
+        // overrides other mvts with take hit mvt
+            if(
+        this.image === this.movements.takeHit.image &&
+        this.frameCurrent < this.movements.takeHit.framesMax - 1
             ) 
             return
  
@@ -158,6 +169,13 @@ class Fighter extends Sprite{
               if(this.image !== this.movements.attack1.image){
                 this.image = this.movements.attack1.image;
                 this.framesMax = this.movements.attack1.framesMax;
+                this.frameCurrent = 0;
+              }  
+               break;
+            case 'takeHit':
+              if(this.image !== this.movements.takeHit.image){
+                this.image = this.movements.takeHit.image;
+                this.framesMax = this.movements.takeHit.framesMax;
                 this.frameCurrent = 0;
               }  
                break;
