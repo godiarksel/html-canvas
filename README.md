@@ -49,4 +49,4 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Chris Courses from Youtube, for being a helpful genius.git 
+- Chris Courses from Youtube, for being a helpful genius.
