@@ -10,7 +10,7 @@
 
 ## Live Demo
 
-[Click here for Live Demo Link](godiarksel.github.io/html-canvas/)
+[Click Here](godiarksel.github.io/html-canvas/)
 
 
 ## Getting Started
