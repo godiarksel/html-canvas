@@ -6,7 +6,8 @@
 
 - HTML Canvas
 - CSS
-- Vanilla Javascript
+- Javascript
+- GSAP
 
 ## Live Demo
 
