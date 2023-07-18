@@ -25,8 +25,8 @@ To get a local copy up and running follow these simple example steps.
 
 ### Setup
 1. Open your GitBash and run the command 'git clone https://github.com/godiarksel/html-canvas.git'.
-2. Once cloned, access the directory with the cloned repo and run the command 'cd book-collection-es6'.
-3. Run 'code .' to open the project in your default code editor
+2. Once cloned, to open the directory with the cloned repo,run the command 'cd html-canvas'.
+3. Run 'code .' to open the project in your default code editor.
 4. Open and inspect the files as you wish.
 5. Click the GoLive button at the bottom right of your screen to run the code for a live demo.
 
