@@ -30,6 +30,19 @@ To get a local copy up and running follow these simple example steps.
 4. Open and inspect the files as you wish.
 5. Click the GoLive button at the bottom right of your screen to run the code for a live demo.
 
+### Player Moves
+#### Player one
+D - Move forward
+A - Move backward
+W - Jump
+S - Attack
+
+#### Player two
+Left Arrow Key - Move forward
+Right Arrow Key - Move backward
+Up Arrow Key - Jump
+Down Arrow Key - Attack
+
 ## Authors
 
 👤 **Godfrey Arksel**
