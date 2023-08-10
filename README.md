@@ -32,16 +32,16 @@ To get a local copy up and running follow these simple example steps.
 
 ### Player Moves
 #### Player one
-D - Move forward
-A - Move backward
-W - Jump
-S - Attack
+- D - Move forward
+- A - Move backward
+- W - Jump
+- S - Attack
 
 #### Player two
-Left Arrow Key - Move forward
-Right Arrow Key - Move backward
-Up Arrow Key - Jump
-Down Arrow Key - Attack
+- Left Arrow Key - Move forward
+- Right Arrow Key - Move backward
+- Up Arrow Key - Jump
+- Down Arrow Key - Attack
 
 ## Authors
 
